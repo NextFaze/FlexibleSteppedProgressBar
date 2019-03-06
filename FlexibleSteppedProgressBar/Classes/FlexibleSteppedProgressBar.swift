@@ -164,7 +164,7 @@ import CoreGraphics
     }
     
     /// The selection animation duration
-    @IBInspectable open var stepAnimationDuration: CFTimeInterval = 0.4
+    @IBInspectable open var stepAnimationDuration: CFTimeInterval = 0.0
     
     /// True if some text should be rendered in the step points. The text value is provided by the delegate
     @IBInspectable open var displayStepText: Bool = true {
@@ -400,18 +400,19 @@ import CoreGraphics
         let progressCenterPoints = Array<CGPoint>(centerPoints[0..<(completedTillIndex+1)])
         
         if let currentProgressCenterPoint = progressCenterPoints.last {
-            
+
             let maskPath = self._maskPath(currentProgressCenterPoint)
             maskLayer.path = maskPath.cgPath
-            
+
+            CATransaction.setAnimationDuration(0)
             CATransaction.begin()
-            let progressAnimation = CABasicAnimation(keyPath: "path")
-            progressAnimation.duration = stepAnimationDuration * CFTimeInterval(abs(completedTillIndex - previousIndex))
-            progressAnimation.toValue = maskPath
-            progressAnimation.isRemovedOnCompletion = false
-            progressAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            
-            
+//            let progressAnimation = CABasicAnimation(keyPath: "path")
+//            progressAnimation.duration = 0
+//            progressAnimation.toValue = maskPath
+//            progressAnimation.isRemovedOnCompletion = false
+//            progressAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+
+
             CATransaction.setCompletionBlock { () -> Void in
                 if(self.animationRendering) {
                     if let delegate = self.delegate {
@@ -420,8 +421,8 @@ import CoreGraphics
                     self.animationRendering = false
                 }
             }
-            
-            maskLayer.add(progressAnimation, forKey: "progressAnimation")
+
+//            maskLayer.add(progressAnimation, forKey: "progressAnimation")
             CATransaction.commit()
         }
         self.previousIndex = self.currentIndex
@@ -759,7 +760,7 @@ import CoreGraphics
                             completedTillIndex = selectedIndex
                         }
                         self.currentIndex = selectedIndex
-                        self.animationRendering = true
+                        self.animationRendering = false
                     }
                 }
             }
