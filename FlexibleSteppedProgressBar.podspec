@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # 2
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   # 3
   s.license = { :type => "MIT", :file => "LICENSE" }
@@ -19,18 +19,14 @@ Pod::Spec.new do |s|
   # For example,
   # s.author = { "Joshua Greene" => "jrg.developer@gmail.com" }
 
-
   # 5 - Replace this URL with your own Github page's URL (from the address bar)
   s.homepage = "https://github.com/amratab/FlexibleSteppedProgressBar"
 
   # For example,
   # s.homepage = "https://github.com/JRG-Developer/RWPickFlavor"
 
-
   # 6 - Replace this URL with your own Git URL from "Quick Setup"
   s.source = { :git => "https://github.com/amratab/FlexibleSteppedProgressBar.git", :tag => "#{s.version}"}
-
-
 
   # 7
   s.framework = "UIKit"
